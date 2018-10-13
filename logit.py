@@ -45,14 +45,14 @@ print('Done. Took %.3f seconds.' % (end - start))
 pots = []
 for i in range(0, TIMES, 1):
     B = bh[i]
-    svm = 0.0
+    cost_sum = 0.0
     for c in test_set: # 测试
         x, y = c[:4], c[-1]
         w, b = B[:4], B[-1]
         h = sigmoid(np.dot(w.T, x) + b)
-        svm += cost_func(h, y)
-    svm /= len(test_set)
-    pots.append(svm)
+        cost_sum += cost_func(h, y)
+    cost_sum /= len(test_set)
+    pots.append(cost_sum)
 
 print('正确率：%f%%'%((1-pots[-1])*100))
 plt.plot(pots, label='%d%%' % int(TT_RATE*100))
